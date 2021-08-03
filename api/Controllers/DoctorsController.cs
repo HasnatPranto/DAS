@@ -46,7 +46,7 @@ namespace api.Controllers
         [HttpGet("{name}")]
         public async Task<ActionResult<Doctor>> GetDoctor_name(string name)
         {
-            var doctor = await _context.Doctors.FindAsync(x=>x.Name == name);
+            var doctor = await _context.Doctors.FirstOrDefaultAsync(x=>x.Name == name);
 
             if (doctor == null)
             {
