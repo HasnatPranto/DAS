@@ -43,6 +43,20 @@ namespace api.Controllers
             return doctor;
         }
 
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Doctor>> GetDoctor_name(string name)
+        {
+            var doctor = await _context.Doctors.FindAsync(x=>x.Name == name);
+
+            if (doctor == null)
+            {
+                return NotFound();
+            }
+
+            return doctor;
+        }
+
+
 
         [Authorize]
         // PUT: api/Doctors/5

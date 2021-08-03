@@ -17,6 +17,7 @@ export class UpdateAppointmentComponent implements OnInit {
   existing_details !: Appointment;
   updated_details!:Appointment;
   doctors:any={};
+  doc : any={};
 
   constructor(private appointmentService:AppoinmentService,private userService:UserService) { }
 
@@ -57,6 +58,17 @@ export class UpdateAppointmentComponent implements OnInit {
     );
   }
 
+  checkAva() {
+
+    var selectedDay = new Date(this.updateForm.get('date').value);
+    this.userService.getDoc(this.updateForm.get('doctor_name').value).subscribe(data=>{
+      this.doc = data;
+    }); 
+    var avaDays = this.appointmentService.getAvailableDays(this.doc.schedule);
+    var available = avaDays[selectedDay.getDay()];
+
+    return !!available;
+  }
   onSubmit(){
 
   }

@@ -25,6 +25,9 @@ export class UserService {
   getDoctor(name:string): Observable<Doctor>{
     return this.http.get<Doctor>(this.baseUrl+'Doctors/GetDoctor/'+name);
   }
+  getDoc(name:string): Observable<Doctor>{
+    return this.http.get<Doctor>(this.baseUrl+'Doctors/GetDoctor_name/'+name);
+  }
   getDoctors(): Observable<Doctor[]>{
     return this.http.get<Doctor[]>(this.baseUrl+'Doctors/GetDoctors');
   }

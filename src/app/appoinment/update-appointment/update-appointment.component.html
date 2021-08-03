@@ -53,6 +53,20 @@
                      Doctor name is required
                     </div>    
                 </div>
+                <label for="password"> Appointment Date</label>
+                <div class="form-group">
+                  <input
+                  [ngClass]="{'is-invalid': (updateForm.get('date').errors || !checkAva()) && updateForm.get('date').touched}"
+                  class="form-control" formControlName="date" type="date">
+                  <div class="invalid-feedback"
+                  *ngIf="updateForm.get('date').touched && updateForm.get('date').hasError('required')">
+                   Date is required
+                  </div>
+                  <div class="invalid-feedback"
+                  *ngIf="updateForm.get('date').touched && !checkAva() && !updateForm.get('date').hasError('required')">
+                  Unavailable date! Please check the doctor's schedule
+                  </div>      
+              </div>
                 
             </form>
             </div>
