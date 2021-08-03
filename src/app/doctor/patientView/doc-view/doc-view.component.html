@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <div>
+        <h2> Doctor Profile </h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <img class="card-img-top image-thumbnail" src="../../../../assets/images/docIcon.jpg">
+                <div class="card-body">
+                    <div>
+                        <strong style="color: rgb(35, 160, 87);">
+                            Doctor name:
+                        </strong>
+                        <p style="color: rgb(4, 4, 43);"> {{doctor.name}}</p>
+                    </div>
+                    <div>
+                        <strong style="color: rgb(236, 138, 72);">
+                            Speciality:
+                        </strong>
+                        <p style="color: rgb(4, 4, 43);"> {{doctor.speciality}}</p>
+                    </div>
+                    <div>
+                        <strong style="color: rgb(42, 123, 216);">
+                            Medical Degree:
+                        </strong>
+                        <p style="color: rgb(4, 4, 43);"> {{doctor.medicalDegree}}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                   <div align="center">
+                    <button (click)="getThisAppoinment(doctor.id)" class="addButton">Book An Appoinment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#about">About Doctor</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#schedule" (click)="getFullSchedule(doctor.schedule)">Schedule</a>
+                  </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane active" id="about" style="margin:10px;">
+
+                  <h3 style="color: rgb(4, 4, 43);"> <b> {{doctor.name}}</b></h3>
+                  <hr>  
+                  <p>
+                      {{doctor.description}}
+                  </p>
+                </div>
+                <div class="tab-pane" id="schedule" style="margin:10px;">
+                    <div *ngFor="let day of days" style="padding-top: 10px;">
+                        <p style="padding:5px 10px; font-weight: 700; background-color: rgb(181, 193, 233);color: rgb(4, 4, 43);">
+                            {{day}}
+                        </p>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

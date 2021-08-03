@@ -1,0 +1,28 @@
+<div class="panel panel-primary" style="padding:20px 35px">
+    <div class="panel-heading">
+      <h3>Admins List</h3>
+      <button class="addButton" [routerLink]="['/create_an_admin']" routerLinkActive="router-link-active"> Add +
+        </button>
+    </div>
+    <div class="panel-body">
+      <table class="table table-hover" table-width="100%" table-border=1>
+        <thead>
+          <tr class="table-dark">
+            <th>id</th>
+            <th>username</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let admin of admins" class="table-info">
+                
+                <td>{{admin.id}}</td>
+                <td>{{admin.username}}</td>    
+                <td>
+                    <button (click)="deleteAdmin(admin.id)" class="deleteButton" style="margin-left: 10px">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

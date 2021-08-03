@@ -1,0 +1,131 @@
+<div class="container mt-3">
+  <div class="col-sm-8">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#new-app">New Appoinment</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#exist-app">View Appoinment</a>
+      </li>
+     
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active" id="new-app" style="margin:10px;">
+        <div *ngIf="appointmentReady()">
+
+          <div class="card mb-3">
+            <h3 class="card-header">Appointment Details</h3>
+
+            <div class="card-body">
+              <div class="adata">
+              <label style="color: red;">Appointment ID: </label>
+              <h4>{{appointmentData.id}}</h4>
+              </div>
+              <div class="adata">
+                <label >PatientName: </label>
+                <h4>{{appointmentData.patientName}}</h4>
+                </div>
+                <div class="adata">
+                  <label>Patient Phone Number: </label>
+                  <h4>{{appointmentData.patientPhoneNumber}}</h4>
+                  </div>
+                <div class="adata">
+                  <label >Doctor Name: </label>
+                  <h4>{{appointmentData.doctorName}}</h4>
+                  </div>
+                <div class="adata">
+                    <label>Appointment Date: </label>
+                    <h4>{{appointmentData.appoinmentDate}}</h4>
+                </div>
+                <div class="adata">
+                  <label>Serial: </label>
+                  <h4>{{appointmentData.serialNumber}}</h4>
+                </div>
+            </div>
+            <div style="padding: 0% 35% 3%;">
+              <button class="btn cancelButton" (click)=gohome()>Return Home</button>
+            </div>
+              
+          </div>
+
+        </div>
+        <div *ngIf="!appointmentReady()" class="form-container mt-3">
+          <div class="form-body">
+
+            <h3 class="title" style="padding-bottom: 15px;">Please Fill Up This Form For An Appointment </h3>
+
+            <form class="the-form" [formGroup]="appoinmentForm" (ngSubmit)=onSubmit()>
+
+              <label for="password"> Patient Name</label>
+
+              <div class="form-group">
+                <input
+                  [ngClass]="{'is-invalid': appoinmentForm.get('patientName').errors && appoinmentForm.get('patientName').touched}"
+                  class="form-control" formControlName="patientName">
+                <div class="invalid-feedback"
+                  *ngIf="appoinmentForm.get('patientName').touched && appoinmentForm.get('patientName').hasError('required')">
+                  Patient name is required</div>
+              </div>
+
+              <label for="password">Doctor Name</label>
+
+              <div *ngIf="!doctorSelected()">
+                <div class="form-group">
+                  <select formControlName="doctorName" class="form-control">
+                    <option disabled> Select Doctor </option>
+                    <option></option>
+                    <option *ngFor="let doc of doctors" (click)="setDoc(doc)">{{doc.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="doctorSelected()">
+                <div class="form-group">
+                  <fieldset>
+                    <input class="form-control" formControlName="doctorName" id="readOnlyInput" type="text" readonly="">
+                  </fieldset>
+                </div>
+              </div>
+
+              <label for="password"> Appoinment Date</label>
+              <div class="form-group">
+                <input
+                  [ngClass]="{'is-invalid': (appoinmentForm.get('appoinmentDate').errors || !checkAva()) && appoinmentForm.get('appoinmentDate').touched}"
+                  class="form-control" formControlName="appoinmentDate" type="date">
+                <div class="invalid-feedback"
+                  *ngIf="appoinmentForm.get('appoinmentDate').touched && appoinmentForm.get('appoinmentDate').hasError('required')">
+                  Appoinment date is required</div>
+                <div class="invalid-feedback"
+                  *ngIf="appoinmentForm.get('appoinmentDate').touched && !checkAva() && !appoinmentForm.get('appoinmentDate').hasError('required')">
+                  Unavailable date! Please check the doctor's schedule</div>
+
+              </div>
+
+              <label for="password">Patient Phone Number</label>
+              <div class="form-group">
+                <input
+                  [ngClass]="{'is-invalid': appoinmentForm.get('patientPhoneNumber').errors &&appoinmentForm.get('patientPhoneNumber').touched}"
+                  class="form-control" formControlName="patientPhoneNumber">
+                <div class="invalid-feedback"
+                  *ngIf="appoinmentForm.get('patientPhoneNumber').touched && appoinmentForm.get('patientPhoneNumber').hasError('required')">
+                  Patient phone number is required</div>
+              </div>
+              
+              <div class="form-group text-center">
+                <button class="btn addButton" type="submit" [disabled]="!appoinmentForm.valid" value="Confirm">
+                 Submit
+                </button>
+              </div>
+            </form>
+
+          </div><!-- FORM BODY-->
+          <!-- FORM FOOTER -->
+        </div>
+      </div>
+
+      <div class="tab-pane" id="exist-app" style="margin:10px;">
+        <app-update-appointment></app-update-appointment>
+      </div>
+    </div>
+  </div>
+
+</div>

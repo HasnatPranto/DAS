@@ -1,0 +1,43 @@
+<div class="container" style="padding-top: 20px;">
+    <div class="card">
+        <div class="card-body">
+            <h2> <div style="color:green;" >Add A New Doctor</div></h2>
+            <div style="width: 400px;">
+
+                <form (ngSubmit)=onSubmit()>
+
+                    <div class="form-group mt-3">
+                        <label for="name"><p class="text-primary">Doctor Name</p></label>
+                        <input type="text" class="form-control" id="name" required [(ngModel)]="doctor.name" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+
+                    <div class="form-group mt-3">
+                        <label for="name"><p class="text-primary">Medical Degree</p></label>
+                        <input type="text" class="form-control" id="medicalDegree" required
+                            [(ngModel)]="doctor.medicalDegree" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="name"><p class="text-primary">Speciality</p></label>
+                        <input type="text" class="form-control" id="speciality" required
+                            [(ngModel)]="doctor.speciality" [ngModelOptions]="{standalone: true}">
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="name"><p class="text-primary">Schedule</p></label>
+                        <input type="text" class="form-control" required [(ngModel)]="doctor.schedule" [ngModelOptions]="{standalone: true}">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="name"><p class="text-primary">Description</p></label>
+                        <textarea type="text" rows="4" class="form-control" id="description" required [(ngModel)]="doctor.description"></textarea>
+                    </div>
+
+                    <button type="submit" class="submitButton">Submit</button>
+                    <button class="cancelButton" (click)="refresh()">Cancel</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

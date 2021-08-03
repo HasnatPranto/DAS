@@ -1,0 +1,61 @@
+<div class="container mt-3">
+    <div class="col-sm-8">
+        
+        <div *ngIf="!updatePage()" class="form-body">
+
+            <form class="the-form" [formGroup]="searchForm" (ngSubmit)=searchID()>
+
+              <label for="password">Appointment ID </label>
+
+              <div class="form-group">
+                <input
+                  [ngClass]="{'is-invalid': searchForm.get('patient_id').errors && searchForm.get('patient_id').touched}"
+                  class="form-control" formControlName="patient_id">
+                <div class="invalid-feedback"
+                  *ngIf="searchForm.get('patient_id').touched && searchForm.get('patient_id').hasError('required')">
+                  Appointment id is required</div>
+              </div>
+              <p></p>
+              <div class="form-group">
+                <button class="btn addButton" type="submit" [disabled]="!searchForm.valid" value="Confirm">
+                 Submit
+                </button>
+              </div>
+        
+              </form>
+        </div>
+        <div *ngIf="updatePage()" class="form-container mt-3" style= "position: absolute;left: 47%;margin-left: -100px;">
+            <div class="form-body">
+            <form class="the-form" [formGroup]="updateForm" (ngSubmit)= onSubmit() >
+
+                <h3 class="title" style="padding-bottom: 15px;"> Update Appointment </h3>
+        
+                <label for="password"> Patient Name</label>
+
+                <div class="form-group">
+                    <input
+                     [ngClass]="{'is-invalid': updateForm.get('patient_name').errors && updateForm.get('patient_name').touched}"
+                    class="form-control" formControlName="patient_name">
+                    <div class="invalid-feedback"
+                    *ngIf="updateForm.get('patient_name').touched && updateForm.get('patient_name').hasError('required')">
+                     Patient name is required
+                    </div>    
+                </div>
+                <label for="password"> Doctor Name</label>
+
+                <div class="form-group">
+                    <select formControlName="doctor_name" class="form-control">
+                        <option selected>{{updateForm.get('doctor_name').value}}</option>
+                        <option *ngFor="let doc of doctors">{{doc.name}}</option>
+                      </select>
+                    <div class="invalid-feedback"
+                    *ngIf="updateForm.get('doctor_name').touched && updateForm.get('doctor_name').hasError('required')">
+                     Doctor name is required
+                    </div>    
+                </div>
+                
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
